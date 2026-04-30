@@ -1,6 +1,6 @@
 **Declutter your mind. Master your tasks.**
 
-A Windows-native CLI task manager with Persian calendar support. Add, edit, delete, and review tasks — all from your terminal. No accounts. No setup fuss. Just your tasks, your way.
+A CLI task manager with Persian calendar support. Add, edit, delete, and review tasks — all from your terminal. No accounts. No setup fuss. Just your tasks, your way.
 
 ## Why Shapemind?
 
