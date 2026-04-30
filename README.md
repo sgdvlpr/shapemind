@@ -114,14 +114,14 @@ Run `shapemind task list --status todo`:
 
 | ID | Title | Due | Status |
 |----|-------|-----|--------|
-| a | Review PRs | 1404-10-09 | todo |
-| f | Deploy to production | 1404-10-15 | todo |
-| k | Write documentation | 1404-10-20 | overdue |
+| a | Review PRs | 2026-05-09 | todo |
+| f | Deploy to production | 2026-05-15 | todo |
+| k | Write documentation | 2026-04-23 | overdue |
 
 ## Roadmap
 - Tagging and grouping tasks
 - Export/import (JSON, CSV)
-- Sharing tasks via encrypted links
+- Sharing tasks via encrypted links (could expire within a certain time)
 - Recurring tasks
 - Notifications (Windows toast)
 
