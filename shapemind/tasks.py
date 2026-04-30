@@ -3,7 +3,7 @@ from rich.table import Table
 from rich.text import Text
 import uuid
 import typer
-import jdatetime
+from typing import List
 from datetime import date, timedelta
 
 console = Console()
@@ -117,9 +117,8 @@ def list(
     console.print(table)
 
 @app.command("delete")
-def delete(task_ids: list[str] = typer.Argument(None), all: bool = typer.Option(False, "--all", help="Delete ALL tasks")):
-    """
-        Delete one or more tasks by ID, or delete all tasks with --all
+def delete(task_ids: List[str] = typer.Argument(None), all: bool = typer.Option(False, "--all", help="Delete ALL tasks")):
+    """Delete one or more tasks by ID, or delete all tasks with --all
     """
     conn = get_db()
     c = conn.cursor()
