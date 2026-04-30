@@ -36,7 +36,7 @@ def add(title: str, due: str = typer.Option("today", "--due")):
     display_date = format_date(due_date)
     typer.echo(f"Added task: {title} (due {str(display_date)}) [ID: {id}]")
 
-@app.command("list")
+@app.command("ls")
 def list(
     on: str = typer.Option(None, "--on", help="Tasks due exactly on this date"),
     before: str = typer.Option(None, "--before", help="Tasks due before this date"),
