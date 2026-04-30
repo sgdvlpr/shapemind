@@ -25,6 +25,9 @@ pip install -e .
 
 ## Dependencies (installed automatically)
 `typer` — CLI framework
+
 `rich` — beautiful terminal formatting
+
 `jdatetime` — Persian calendar support
+
 `tabulate` — table layouts
