@@ -116,7 +116,7 @@ Run `shapemind task list --status todo`:
 |----|-------|-----|--------|
 | a | Review PRs | 2026-05-09 | todo |
 | f | Deploy to production | 2026-05-15 | todo |
-| k | Write documentation | 2026-04-23 | overdue |
+| k | Write documentation | 2026-05-23 | todo |
 
 ## Roadmap
 - Tagging and grouping tasks
