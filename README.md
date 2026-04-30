@@ -30,4 +30,21 @@ pip install -e .
 
 `jdatetime` — Persian calendar support
 
-`tabulate` — table layouts
+`tabulate` — Clean table layouts for task lists
+
+## Quick Start
+
+# Add your first task
+shapemind task add "Review pull requests" --due tomorrow
+
+# See what's waiting
+shapemind task list
+
+# Mark it done
+shapemind task update a3b5 --status done
+
+# Add a task with Persian date
+shapemind task add "تکمیل پروژه" --due 1404-10-15
+
+# Show only urgent tasks
+shapemind task list --status todo --before tomorrow
