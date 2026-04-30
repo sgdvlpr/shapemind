@@ -41,7 +41,7 @@ shapemind task add "Review pull requests" --due tomorrow
 
 **See what's waiting:**
 ```bash
-shapemind task list
+shapemind task ls
 ```
 
 **Add a task with Persian date**
@@ -51,7 +51,7 @@ shapemind task add "تکمیل پروژه" --due 1404-10-15
 
 **Show only urgent tasks**
 ```bash
-shapemind task list --status todo --before tomorrow
+shapemind task ls --status todo --before tomorrow
 ```
 
 ## Command Reference
@@ -59,10 +59,10 @@ shapemind task list --status todo --before tomorrow
 | Command | Description |
 |---------|-------------|
 | `shapemind task add "Title" --due tomorrow` | Add a new task |
-| `shapemind task list` | Show all tasks |
-| `shapemind task list --status todo` | Show only todo tasks |
-| `shapemind task list --status done` | Show completed tasks |
-| `shapemind task list --on 2026-10-10` | Show tasks due on a specific date |
+| `shapemind task ls` | Show all tasks |
+| `shapemind task ls --status todo` | Show only todo tasks |
+| `shapemind task ls --status done` | Show completed tasks |
+| `shapemind task ls --on 2026-10-10` | Show tasks due on a specific date |
 | `shapemind task update a3b5 --status done` | Mark a task complete |
 | `shapemind task update a3b5 --title "New Title"` | Change task title |
 | `shapemind task delete a3b5` | Delete a single task |
@@ -81,7 +81,7 @@ Shapemind uses SQLite for persistence. Your tasks are stored in shapemind.db in 
 ## Development
 Run without installing
 ```bash
-python -m shapemind.cli task list
+python -m shapemind.cli task ls
 ```
 
 Install in editable mode (changes reflect immediately)
@@ -110,7 +110,7 @@ pip install -e .
 
 ## Example Output
 
-Run `shapemind task list --status todo`:
+Run `shapemind task ls --status todo`:
 
 | ID | Title | Due | Status |
 |----|-------|-----|--------|
