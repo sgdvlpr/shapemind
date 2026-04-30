@@ -41,14 +41,3 @@ def resolve_id(prefix: str) -> str:
     
     return match_ids[0] # the unique match
 
-def parse_due_date(date_str: str):
-    """
-    Parse date from Persian calendar input like '1404-07-09'.
-    Returns a datetime.date object (Gregorian)
-    """
-
-    try:
-        jd = jdatetime.date.fromisoformat(date_str)
-        return jd.togregorian()
-    except ValueError:
-        raise ValueError("Invalid Persian date. Use YYYY-MM-DD")

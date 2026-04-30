@@ -9,26 +9,21 @@ from datetime import date, timedelta
 console = Console()
 
 from shapemind.db import get_db
-from shapemind.utils import parse_due_date, unique_prefixes, resolve_id
+from shapemind.utils import unique_prefixes, resolve_id
+from shapemind.date_utils import parse_date, format_date, get_today_str
 
 app = typer.Typer(help="Task management")
 
 @app.command("add")
-def add_task(title: str, due: str = typer.Option("today", "--due")):
+def add(title: str, due: str = typer.Option("today", "--due")):
     """
     Add a task with a title and due date.
     --due accepts:
     - "today" or "tomorrow"
     - Persian date in YYYY-MM-DD
     """
-    if due == "today":
-        due_date = date.today()
-    elif due == "tomorrow":
-        due_date = date.today() + timedelta(days=1)
-    else:
-        due_date = parse_due_date(due)
-
-    # Convert date object to string to avoid DeprecationWarning
+    
+    due_date = parse_date(due)
     due_str = due_date.isoformat()  # "YYYY-MM-DD"
     id = uuid.uuid4().hex[:8] # short random ID
 
@@ -37,12 +32,12 @@ def add_task(title: str, due: str = typer.Option("today", "--due")):
     conn.commit()
     conn.close()
 
-    # Show Persian date for user feedback
-    persian_due = jdatetime.date.fromgregorian(date=due_date)
-    typer.echo(f"Added task: {title} (due {str(persian_due)}) [ID: {id}]")
+    # Show date for user feedback
+    display_date = format_date(due_date)
+    typer.echo(f"Added task: {title} (due {str(display_date)}) [ID: {id}]")
 
 @app.command("list")
-def list_tasks(
+def list(
     on: str = typer.Option(None, "--on", help="Tasks due exactly on this date"),
     before: str = typer.Option(None, "--before", help="Tasks due before this date"),
     after: str = typer.Option(None, "--after", help="Tasks due after this date"),
@@ -50,7 +45,7 @@ def list_tasks(
     sort: str = typer.Option("asc", "--sort", help="Sort by due date: asc or desc")           
 ):
     """
-    List tasks filtered by date (Persian) and/or status.
+    List tasks filtered by date and/or status.
     """
     
     conn = get_db()
@@ -64,13 +59,13 @@ def list_tasks(
     # Date filter
     if on:
         conditions.append("due = ?") 
-        params.append(parse_due_date(on).isoformat())
+        params.append(parse_date(on).isoformat())
     elif before:
         conditions.append("due < ?") 
-        params.append(parse_due_date(before).isoformat())
+        params.append(parse_date(before).isoformat())
     elif after:
         conditions.append("due > ?") 
-        params.append(parse_due_date(after).isoformat())
+        params.append(parse_date(after).isoformat())
 
     # Status filter
     if status:
@@ -101,13 +96,13 @@ def list_tasks(
     table = Table(title="📋 Your Tasks", header_style="bold cyan")
     table.add_column("ID", style="dim", no_wrap=True)
     table.add_column("Title", style="bold", width=40)
-    table.add_column("Due (Persian)", style="cyan")
+    table.add_column("Due", style="cyan")
     table.add_column("Status", style="bold")
 
     for row in rows:
         display_id = row["id"][:prefix_len]
         gregorian_due = date.fromisoformat(row["due"])
-        persian_due = jdatetime.date.fromgregorian(date=gregorian_due)
+        display_date = format_date(gregorian_due)
         
         # Apply colors based on status
         if row["status"] == "overdue":
@@ -117,13 +112,12 @@ def list_tasks(
         else:
             status_text = Text(row["status"], style="yellow")
         
-        table.add_row(display_id, row["title"], str(persian_due), status_text)
-
+        table.add_row(display_id, row["title"], str(display_date), status_text)
 
     console.print(table)
 
 @app.command("delete")
-def delete_task(task_ids: list[str] = typer.Argument(None), all: bool = typer.Option(False, "--all", help="Delete ALL tasks")):
+def delete(task_ids: list[str] = typer.Argument(None), all: bool = typer.Option(False, "--all", help="Delete ALL tasks")):
     """
         Delete one or more tasks by ID, or delete all tasks with --all
     """
@@ -151,13 +145,13 @@ def delete_task(task_ids: list[str] = typer.Argument(None), all: bool = typer.Op
     conn.close()
 
 @app.command("update")
-def update_task(
+def update(
     id: str = typer.Argument(..., help="ID of the task to update"),
     title: str = typer.Option(None, "--title", help="New title"),
-    due: str = typer.Option(None, "--due", help="New due date (today / tomorrow or Pesian YYYY-MM-DD)"),
+    due: str = typer.Option(None, "--due", help="New due date (today / tomorrow or YYYY-MM-DD)"),
     status: str = typer.Option(None, "--status", help="New status: todo / done")
 ):
-    """Update a task's title, due date, or status."""
+    """Update a task's title, due date, or status"""
     conn = get_db()
     c = conn.cursor()
 
@@ -176,15 +170,9 @@ def update_task(
         if due == "today":
             new_due = date.today()
         elif due == "tomorrow":
-            new_due == date.today() + timedelta(days=1)
+            new_due = date.today() + timedelta(days=1)
         else:
-            try:
-                jd = jdatetime.date.fromisoformat(due)
-                new_due = jd.togregorian()
-            except ValueError:
-                typer.echo("Invalid date. Use 'today', 'tomorrow', or Persian YYYY-MM-DD.")
-                conn.close()
-                raise typer.Exit()
+            new_due = parse_date(due)
     else:
         new_due = date.fromisoformat(row["due"])
     
@@ -202,8 +190,8 @@ def update_task(
     conn.commit()
     conn.close()
 
-    persian_due = jdatetime.date.fromgregorian(date=new_due)
-    typer.echo(f"Task {id} updated. Title: '{new_title}', Due: '{str(persian_due)}', Status: {new_status}")
+    display_date = format_date(new_due)
+    typer.echo(f"Task {id} updated. Title: '{new_title}', Due: '{str(display_date)}', Status: {new_status}")
 
 def update_overdue():
     """Mark all tasks whose due date has passed as 'overdue'."""
