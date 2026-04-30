@@ -34,17 +34,23 @@ pip install -e .
 
 ## Quick Start
 
-# Add your first task
+**Add your first task:**
+```bash
 shapemind task add "Review pull requests" --due tomorrow
+```
 
-# See what's waiting
+**See what's waiting:**
+```bash
 shapemind task list
+```
 
-# Mark it done
-shapemind task update a3b5 --status done
-
-# Add a task with Persian date
+**Add a task with Persian date**
+```bash
 shapemind task add "تکمیل پروژه" --due 1404-10-15
+```
 
-# Show only urgent tasks
+**Show only urgent tasks**
+```bash
 shapemind task list --status todo --before tomorrow
+```
+
