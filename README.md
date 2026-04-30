@@ -2,7 +2,7 @@
 
 A Windows-native CLI task manager with Persian calendar support. Add, edit, delete, and review tasks — all from your terminal. No accounts. No setup fuss. Just your tasks, your way.
 
-## ✨ Why Shapemind?
+## Why Shapemind?
 
 Unlike generic task managers, Shapemind is built for **developers and terminal lovers** who need:
 
@@ -12,7 +12,7 @@ Unlike generic task managers, Shapemind is built for **developers and terminal l
 - ✅ **Simple CLI** — intuitive commands that just work
 - ✅ **Beautiful output** — color-coded tables with the `rich` library
 
-## 📦 Installation
+## Installation
 
 ### From source (recommended)
 
@@ -20,3 +20,11 @@ Unlike generic task managers, Shapemind is built for **developers and terminal l
 git clone https://github.com/sgdvlpr/shapemind.git
 cd shapemind
 pip install -e .
+
+```
+
+## Dependencies (installed automatically)
+`typer` — CLI framework
+`rich` — beautiful terminal formatting
+`jdatetime` — Persian calendar support
+`tabulate` — table layouts
