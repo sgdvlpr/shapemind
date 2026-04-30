@@ -125,3 +125,17 @@ Run `shapemind task list --status todo`:
 - Recurring tasks
 - Notifications (Windows toast)
 
+## 👨‍💻 Author
+
+Saeed (@sgdvlpr) — building tools for developers in Iran and beyond.
+
+## 📄 License
+
+MIT License — free for personal and commercial use.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+See the [LICENSE](LICENSE) file for details.
+
+---
+
