@@ -54,3 +54,21 @@ shapemind task add "تکمیل پروژه" --due 1404-10-15
 shapemind task list --status todo --before tomorrow
 ```
 
+## 📋 Command Reference
+
+| Command | Description |
+|---------|-------------|
+| `shapemind task add "Title" --due tomorrow` | Add a new task |
+| `shapemind task list` | Show all tasks |
+| `shapemind task list --status todo` | Show only todo tasks |
+| `shapemind task list --status done` | Show completed tasks |
+| `shapemind task list --on 1404-10-15` | Show tasks due on a specific date |
+| `shapemind task update a3b5 --status done` | Mark a task complete |
+| `shapemind task update a3b5 --title "New Title"` | Change task title |
+| `shapemind task delete a3b5` | Delete a single task |
+| `shapemind task delete --all` | Delete ALL tasks |
+| `shapemind config` | Show current calendar |
+| `shapemind config persian` | Switch to Persian calendar |
+| `shapemind config gregorian` | Switch to Gregorian calendar |
+
+
