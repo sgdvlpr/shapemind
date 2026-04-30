@@ -71,4 +71,21 @@ shapemind task list --status todo --before tomorrow
 | `shapemind config persian` | Switch to Persian calendar |
 | `shapemind config gregorian` | Switch to Gregorian calendar |
 
+## Data Storage
+Shapemind uses SQLite for persistence. Your tasks are stored in shapemind.db in the directory you run the command from.
+
+- No cloud dependency
+- No sign-up required
+- Your data, your machine
+
+## Development
+Run without installing
+```bash
+python -m shapemind.cli task list
+```
+
+Install in editable mode (changes reflect immediately)
+```bash
+pip install -e .
+```
 
