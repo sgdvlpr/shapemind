@@ -114,11 +114,9 @@ Run `shapemind task list --status todo`:
 
 | ID | Title | Due | Status |
 |----|-------|-----|--------|
-| a3b5 | Review PRs | 1404-10-09 | todo |
-| f8h2 | Deploy to production | 1404-10-15 | todo |
-| k9m4 | Write documentation | 1404-10-20 | overdue |
-
-> **Terminal colors:** `todo` appears in yellow, `done` in green, `overdue` in bold red.
+| a | Review PRs | 1404-10-09 | todo |
+| f | Deploy to production | 1404-10-15 | todo |
+| k | Write documentation | 1404-10-20 | overdue |
 
 ## Roadmap
 - Tagging and grouping tasks
