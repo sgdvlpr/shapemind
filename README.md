@@ -89,3 +89,41 @@ Install in editable mode (changes reflect immediately)
 pip install -e .
 ```
 
+## Configuration
+
+| Command | Description |
+|---------|-------------|
+| `shapemind config` | Show current calendar setting |
+| `shapemind config persian` | Switch to Persian (Jalali) calendar |
+| `shapemind config gregorian` | Switch to Gregorian calendar |
+
+## Date Formats
+
+| Input | Meaning | Example |
+|-------|---------|---------|
+| `today` | Current day | `--due today` |
+| `tomorrow` | Next day | `--due tomorrow` |
+| `YYYY-MM-DD` (Persian) | Persian calendar date | `--due 1404-10-15` |
+| `YYYY-MM-DD` (Gregorian) | Gregorian date | `--due 2026-06-05` |
+
+> **Smart parsing:** Shapemind automatically detects which calendar you're using. Mix them freely.
+
+## Example Output
+
+Run `shapemind task list --status todo`:
+
+| ID | Title | Due | Status |
+|----|-------|-----|--------|
+| a3b5 | Review PRs | 1404-10-09 | todo |
+| f8h2 | Deploy to production | 1404-10-15 | todo |
+| k9m4 | Write documentation | 1404-10-20 | overdue |
+
+> **Terminal colors:** `todo` appears in yellow, `done` in green, `overdue` in bold red.
+
+## Roadmap
+- Tagging and grouping tasks
+- Export/import (JSON, CSV)
+- Sharing tasks via encrypted links
+- Recurring tasks
+- Notifications (Windows toast)
+
